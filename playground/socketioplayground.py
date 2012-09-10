@@ -13,7 +13,8 @@ class EchoNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 
     def on_echo(self, msg):
         print('Echo message')
-        self.broadcast_event('echo msg', msg)
+        #Send to the user only
+        self.emit('echo msg', msg)
         return True
 
 
