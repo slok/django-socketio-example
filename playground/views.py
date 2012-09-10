@@ -1,6 +1,9 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+#Unused import to load all the socketio gevent implementations
+
+from playground.socketioplayground import *
 
 def index(request):
     return render_to_response('playground/index.html',
