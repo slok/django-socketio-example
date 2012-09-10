@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-import socketio
+
+import socketio.sdjango
 
 
 urlpatterns = patterns('',
