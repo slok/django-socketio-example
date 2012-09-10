@@ -1,0 +1,33 @@
+ {% extends "djangosocketioexample/base.html" %}
+
+{% block body %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //connect to the socket
+        var socket = io.connect("/echo");
+
+        //receive messages and update html
+        socket.on('echo msg', function(message){
+            $('<div class="alert alert-info">').text(message).appendTo('#messages')
+        });
+
+        //set the sender action to the button
+        $('button').click(function(){
+            msg = $.trim($("#echo-text").val());
+            if (msg)
+                socket.emit('echo', msg);
+            $("#echo-text").val('');
+        });
+
+    });
+</script>
+
+<div id="messages">
+</div>
+
+<form>
+    <input id="echo-text" type="text" />
+    <button class="btn btn-large btn-primary" type="button">echo!</button>
+</form>
+{% endblock body %} 
