@@ -1,3 +1,5 @@
+import os
+
 # Django settings for djangosocketioexample project.
 
 DEBUG = True
@@ -64,6 +66,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(os.getcwd(), 'djangosocketioexample', 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -103,6 +106,8 @@ ROOT_URLCONF = 'djangosocketioexample.urls'
 WSGI_APPLICATION = 'djangosocketioexample.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(os.getcwd(), 'djangosocketioexample', 'templates'),
+    os.path.join(os.getcwd(), 'playground', 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -115,7 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'playground'
+    'playground',
 )
 
 # A sample logging configuration. The only tangible logging
