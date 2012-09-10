@@ -1,1 +1,14 @@
- 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Django chat</title>
+        <!-- Bootstrap -->
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/socket.io.min.js"></script>
+    </head>
+    <body>
+        {% block body %} {% endblock body %}
+    </body>
+</html> 
