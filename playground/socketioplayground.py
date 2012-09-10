@@ -11,10 +11,16 @@ class EchoNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
     def initialize(self):
         print("Socketio echo session started")
 
-    def on_echo(self, msg):
-        print('Echo message')
+    def on_echo_me(self, msg):
+        print('Echo me \"%s\" message' % msg)
         #Send to the user only
         self.emit('echo msg', msg)
+        return True
+
+    def on_echo_all(self, msg):
+        print('Echo all \"%s\" message' % msg)
+        #Send to the user only
+        self.broadcast_event('echo msg', msg)
         return True
 
 

@@ -13,10 +13,17 @@
         });
 
         //set the sender action to the button
-        $('button').click(function(){
+        $('#echo-me-btn').click(function(){
             msg = $.trim($("#echo-text").val());
             if (msg)
-                socket.emit('echo', msg);
+                socket.emit('echo me', msg);
+            $("#echo-text").val('');
+        });
+
+        $('#echo-all-btn').click(function(){
+            msg = $.trim($("#echo-text").val());
+            if (msg)
+                socket.emit('echo all', msg);
             $("#echo-text").val('');
         });
 
@@ -28,6 +35,7 @@
 
 <form>
     <input id="echo-text" type="text" />
-    <button class="btn btn-large btn-primary" type="button">echo!</button>
+    <button id="echo-me-btn" class="btn btn-large btn-primary" type="button">echo me!</button>
+    <button id="echo-all-btn"class="btn btn-large btn-primary" type="button">echo all!</button>
 </form>
 {% endblock body %} 
