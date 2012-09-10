@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Django chat</title>
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <title>Django Socketio playground</title>
         <!-- Bootstrap -->
         <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -9,6 +16,14 @@
         <script type="text/javascript" src="{{ STATIC_URL }}js/socket.io.min.js"></script>
     </head>
     <body>
-        {% block body %} {% endblock body %}
+        <div class="container">
+            {% block body %} {% endblock body %}
+            <hr>
+            <footer>
+             {% block footer %} CC3.0 slok {% endblock footer %}
+            </footer>
+        </div> <!-- /container -->
+
+        
     </body>
 </html> 
