@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import socketio
 
 
@@ -7,3 +8,5 @@ urlpatterns = patterns('',
     url(r'^playground/', include('playground.urls')),
     url(r'^socket\.io', include(socketio.sdjango.urls))
 )
+
+urlpatterns += staticfiles_urlpatterns()
