@@ -1,0 +1,25 @@
+ {% extends "djangosocketioexample/base.html" %}
+
+{% block body %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //connect to the socket
+        var socket = io.connect("/time");
+
+        //receive messages and update html
+        socket.on('update client time', function(message){
+            alert('Server time: ' + message);
+        });
+
+        //set the sender action to the button
+        $('#get-server-time').click(function(){
+            socket.emit('update time', '');
+        });
+
+    });
+</script>
+<form>
+    <button id="get-server-time" class="btn btn-large btn-primary" type="button">Get server time</button>
+</form>
+{% endblock body %} 
