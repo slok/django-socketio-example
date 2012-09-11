@@ -1,0 +1,101 @@
+ {% extends "djangosocketioexample/base.html" %}
+
+{% block body %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //connect to the socket
+        var socket = null;
+        var user_id = null;
+        var connected = false;
+
+        // Keypress event
+        $("#message-input").keypress(function(key) {
+            keyCode = key.keyCode? key.keyCode: key.which;
+            // Is return event? (key code = 13)
+            if (keyCode == 13){
+                // Trim message and send
+                msg = $.trim($("#message-input").val());
+                if (msg)
+                    socket.emit('says', user_id, msg);
+
+                //clear the input box and return false to not reload the page
+                $("#message-input").val('');
+                return false;
+            }
+        });
+
+         //Connect button event
+        $('#connection-button').click(function(){
+             $('#myModal').modal()
+        });
+
+        $('#modal-nick-button').click(function(){
+            $('#myModal').modal('hide');
+            user_id = $('#nick-input').val();
+
+            //connect
+            if (!connected){   
+                //Show the modal for the username
+                socket = io.connect("/chat");
+
+                //send the connection  message
+                 socket.emit('connected', user_id);
+
+
+                //receive messages and update html
+                socket.on('receive msg', function(nick, message){
+                    msg = ('[' + nick + ']: ' + message)
+                    $('<p>').text(msg).appendTo('#messages');
+                    
+                    //Scroll down the messages
+                    var objDiv = document.getElementById("messages");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                    return false;
+                });
+                socket.on('user connected', function(nick){
+                    msg = ('>>>>>> user: ' + nick + ' connected <<<<<<');
+                    $('<p>').text(msg).appendTo('#messages');
+                });
+                //show the input text
+                marker = $('<span />').insertBefore('#message-input');
+                $('#message-input').detach().attr('type', 'text').insertAfter(marker).focus();
+                marker.remove();
+
+                //hide the button
+                $('#connection-button').hide()
+                connected = true
+            }else{
+                connected = false
+            }
+        });
+
+    });
+</script>
+<div >.
+</div>
+<div id="messages" class="hero-unit" style="height:200px;width:600px;overflow:auto;">
+</div>
+
+<form>
+    <input id="message-input" type="hidden" />
+    <button id="connection-button" class="btn btn-large btn-primary" type="button">Connect</button>
+</form>
+
+
+<!--modal-->
+
+<div id="myModal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Inser nickname please</h3>
+    </div>
+    <div class="modal-body">
+         <input id="nick-input" type="text" />
+    </div>
+    <div class="modal-footer">
+        <a id="modal-nick-button" href="#" class="btn btn-primary">Enter chat!</a>
+    </div>
+</div>
+
+{% endblock body %} 

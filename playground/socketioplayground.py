@@ -42,5 +42,11 @@ class EchoNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
     def initialize(self):
         print("Socketio chat session started")
 
-    def on_say(self, msg):
+    def on_says(self, user, msg):
+        print('%s says: \'%s\'' % (user, msg))
+        self.broadcast_event('receive msg', user, msg)
         return True
+
+    def on_connected(self, user):
+        print('User %s connected' % user)
+        self.broadcast_event('user connected', user)
