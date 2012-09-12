@@ -41,7 +41,7 @@
                 socket = io.connect("/chat");
 
                 //send the connection  message
-                 socket.emit('connected', user_id, color);
+                 socket.emit('join', user_id, color);
 
 
                 //receive messages and update html

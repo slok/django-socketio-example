@@ -48,7 +48,7 @@ class EchoNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
         self.broadcast_event('receive msg', user, msg)
         return True
 
-    def on_connected(self, user, color):
+    def on_join(self, user, color):
         print('User %s connected with color %s' % (user, color))
         self.socket.session['nick'] = user
         self.socket.session['color'] = color
