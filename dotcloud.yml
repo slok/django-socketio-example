@@ -1,4 +1,4 @@
 www:
   type: python
-systempackages:
-  - libevent-dev
+  systempackages:
+    - libevent-dev
