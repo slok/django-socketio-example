@@ -8,7 +8,7 @@
         var socket = null;
         var user_id = null;
         var connected = false;
-        var color  
+        var color = '#b02020'; //default red
 
         // Keypress event
         $("#message-input").keypress(function(key) {
@@ -45,9 +45,11 @@
 
 
                 //receive messages and update html
-                socket.on('receive msg', function(nick, message){
-                    msg = ('[' + nick + ']: ' + message)
-                    $('<p>').text(msg).appendTo('#messages');
+                socket.on('receive msg', function(nick, message, nickColor){
+                    nickAux = '<span style=\'font-weight:bold; color:' +
+                                    nickColor + ';\'>' + nick + '</span>: '
+                    
+                    $('<p>').html(nickAux + message).appendTo('#messages');
                     
                     //Scroll down the messages
                     var objDiv = document.getElementById("messages");
@@ -57,8 +59,9 @@
 
                 //user connected
                 socket.on('user connected', function(nick, nickColor){
-                    msg = ('>>>>>> user: ' + nick + ' connected <<<<<<');
-                    $('<p>').text(msg).appendTo('#messages');
+                    nickAux = '<span style=\'font-weight:bold; color:' +
+                                    nickColor + ';\'>' + nick + '</span>';
+                    $('<div class="alert alert-success">').html('User ' + nickAux + ' connected').appendTo('#messages');
                 });
 
                 //show the input text

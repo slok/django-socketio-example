@@ -45,7 +45,8 @@ class EchoNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
     def on_says(self, msg):
         user = self.socket.session['nick']
         print('%s says: \'%s\'' % (user, msg))
-        self.broadcast_event('receive msg', user, msg)
+        color = self.socket.session['color']
+        self.broadcast_event('receive msg', user, msg, color)
         return True
 
     def on_join(self, user, color):
