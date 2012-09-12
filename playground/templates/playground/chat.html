@@ -8,6 +8,7 @@
         var socket = null;
         var user_id = null;
         var connected = false;
+        var color  
 
         // Keypress event
         $("#message-input").keypress(function(key) {
@@ -40,7 +41,7 @@
                 socket = io.connect("/chat");
 
                 //send the connection  message
-                 socket.emit('connected', user_id);
+                 socket.emit('connected', user_id, color);
 
 
                 //receive messages and update html
@@ -55,7 +56,7 @@
                 });
 
                 //user connected
-                socket.on('user connected', function(nick){
+                socket.on('user connected', function(nick, nickColor){
                     msg = ('>>>>>> user: ' + nick + ' connected <<<<<<');
                     $('<p>').text(msg).appendTo('#messages');
                 });
@@ -72,7 +73,11 @@
                 connected = false
             }
         });
-
+        $('.color-picker').miniColors({
+            close: function(hex, rgb) {  
+                color = hex;
+            }
+        });
     });
 </script>
 <div >.
@@ -95,7 +100,7 @@
     </div>
     <div class="modal-body">
          <input id="nick-input" type="text" />
-    </div>
+        <input autocomplete="off" maxlength="7" name="color4" class="color-picker miniColors" size="7" type="hidden" value="#b02020">
     <div class="modal-footer">
         <a id="modal-nick-button" href="#" class="btn btn-primary">Enter chat!</a>
     </div>
