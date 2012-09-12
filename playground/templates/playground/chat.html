@@ -17,7 +17,7 @@
                 // Trim message and send
                 msg = $.trim($("#message-input").val());
                 if (msg)
-                    socket.emit('says', user_id, msg);
+                    socket.emit('says', msg);
 
                 //clear the input box and return false to not reload the page
                 $("#message-input").val('');
@@ -53,10 +53,13 @@
                     objDiv.scrollTop = objDiv.scrollHeight;
                     return false;
                 });
+
+                //user connected
                 socket.on('user connected', function(nick){
                     msg = ('>>>>>> user: ' + nick + ' connected <<<<<<');
                     $('<p>').text(msg).appendTo('#messages');
                 });
+
                 //show the input text
                 marker = $('<span />').insertBefore('#message-input');
                 $('#message-input').detach().attr('type', 'text').insertAfter(marker).focus();
