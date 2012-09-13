@@ -50,48 +50,55 @@
         });
 
         $('#modal-nick-button').click(function(){
-            $('#myModal').modal('hide');
             user_id = $('#nick-input').val();
 
-            //connect
-            if (!connected){   
-                //Show the modal for the username
-                socket = io.connect("/chat");
+            if (!user_id)
+                alert('Enter nick please!');
+            else{
 
-                //send the connection  message
-                 socket.emit('join', user_id, color);
+                $('#myModal').modal('hide');
+                
+
+                //connect
+                if (!connected){   
+                    //Show the modal for the username
+                    socket = io.connect("/chat");
+
+                    //send the connection  message
+                     socket.emit('join', user_id, color);
 
 
-                //receive messages and update html
-                socket.on('receive msg', function(nick, message, nickColor){
-                    nickAux = '<span style=\'font-weight:bold; color:' +
-                                    nickColor + ';\'>' + nick + '</span>: '
-                    
-                    $('<p>').html(nickAux + message).appendTo('#messages');
-                    
-                    //Scroll down the messages
-                    var objDiv = document.getElementById("messages");
-                    objDiv.scrollTop = objDiv.scrollHeight;
-                    return false;
-                });
+                    //receive messages and update html
+                    socket.on('receive msg', function(nick, message, nickColor){
+                        nickAux = '<span style=\'font-weight:bold; color:' +
+                                        nickColor + ';\'>' + nick + '</span>: '
+                        
+                        $('<p>').html(nickAux + message).appendTo('#messages');
+                        
+                        //Scroll down the messages
+                        var objDiv = document.getElementById("messages");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                        return false;
+                    });
 
-                //user connected
-                socket.on('user connected', function(nick, nickColor){
-                    nickAux = '<span style=\'font-weight:bold; color:' +
-                                    nickColor + ';\'>' + nick + '</span>';
-                    $('<div class="alert alert-success">').html('User ' + nickAux + ' connected').appendTo('#messages');
-                });
+                    //user connected
+                    socket.on('user connected', function(nick, nickColor){
+                        nickAux = '<span style=\'font-weight:bold; color:' +
+                                        nickColor + ';\'>' + nick + '</span>';
+                        $('<div class="alert alert-success">').html('User ' + nickAux + ' connected').appendTo('#messages');
+                    });
 
-                //show the input text
-                marker = $('<span />').insertBefore('#message-input');
-                $('#message-input').detach().attr('type', 'text').insertAfter(marker).focus();
-                marker.remove();
+                    //show the input text
+                    marker = $('<span />').insertBefore('#message-input');
+                    $('#message-input').detach().attr('type', 'text').insertAfter(marker).focus();
+                    marker.remove();
 
-                //hide the button
-                $('#connection-button').hide()
-                connected = true
-            }else{
-                connected = false
+                    //hide the button
+                    $('#connection-button').hide()
+                    connected = true
+                }else{
+                    connected = false
+                }
             }
         });
         $('.color-picker').miniColors({
