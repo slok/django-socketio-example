@@ -20,13 +20,31 @@
     </head>
     <body>
         <div class="container">
+            {% block menubar %} 
+            <div class="navbar navbar-inverse navbar-fixed-top">
+              <div class="navbar-inner">
+                <div class="container">
+                  <a class="brand" href="/">Django socketio example</a>
+                  <div class="nav-collapse collapse">
+                    <ul class="nav">
+                      <li><a href="playground/echo">Echo</a></li>
+                      <li><a href="playground/time">Time</a></li>
+                      <li><a href="playground/chat">Chat</a></li>
+                      <li><a href="https://github.com/slok/django-socketio-example">Source code</a></li>
+                    </ul>
+                  </div><!--/.nav-collapse -->
+                </div>
+              </div>
+            </div>
+            {% endblock menubar %}
+
             {% block body %} {% endblock body %}
             <hr>
             <footer>
-             {% block footer %} CC3.0 slok {% endblock footer %}
+             {% block footer %} 
+             3 clause/New BSD license: <a href="http://www.opensource.org/licenses/BSD-3-Clause">opensource</a>, <a href="http://en.wikipedia.org/wiki/BSD_licenses">wikipedia</a> 
+             {% endblock footer %}
             </footer>
         </div> <!-- /container -->
-
-        
     </body>
 </html> 

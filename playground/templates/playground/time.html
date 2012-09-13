@@ -1,5 +1,23 @@
  {% extends "djangosocketioexample/base.html" %}
 
+{% block menubar %} 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Django socketio example</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="playground/echo">Echo</a></li>
+              <li class="active"><a href="playground/time">Time</a></li>
+              <li><a href="playground/chat">Chat</a></li>
+              <li><a href="https://github.com/slok/django-socketio-example">Source code</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+{% endblock menubar %}
+
 {% block body %}
 
 <script type="text/javascript">

@@ -1,5 +1,46 @@
  {% extends "djangosocketioexample/base.html" %}
 
+
 {% block body %}
-Hello
+
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+    <h1>Django Socketio</h1>
+    <br/>
+    <p>
+        The aim of this project is to test that we can use websockets (well 
+        we are using socketio so not only websockets) with django although 
+        Django is created with synchronous idea in mind. To test this example 
+        there are 3 demos in the playground.
+        
+        <ul>
+            <li><a href="playground/echo">Echo</a>: Echo an string to himself or to all the people that are connected to the echo demo</li>
+            <li><a href="playground/time">Time</a>: Echo the time of the server</li>
+            <li><a href="playground/chat">Chat</a>: A very simple chat (ideal for <strike>testing</strike> trolling xD)</li>
+        </ul>
+
+        For this project we have used various technologies:
+
+        <ul>
+            <li><a href="https://www.djangoproject.com/">Django 1.4.1</a></li>
+            <li><a href="http://socket.io/">Socket.io 0.9.1</a></li>
+            <li><a href="https://github.com/abourget/gevent-socketio/">Gevent-socketio</a></li>
+        </ul>
+
+        Also thanks to this other technologies:
+        <ul>
+            <li><a href="http://gunicorn.org/">Gunicorn</a> for the WSHI HTTP server</li>
+            <li><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> for the templates</li>
+            <li><a href="https://github.com/claviska/jquery-miniColors">Jquery-miniColors</a> for the color picker</li>
+            <li><a href="https://www.dotcloud.com/">Dotcloud</a> for the demo hosting</li>
+        </ul>
+
+        Maybe someone also wants to see the code for deploying custom app in dotcloud
+        in this case is with gunicorn + gevent-socketio + django
+
+        <h2>Grab the source code at <a href="https://github.com/slok/django-socketio-example">Github</a></h2>
+
+    </p>
+</div>
+
 {% endblock body %}
