@@ -6,11 +6,6 @@ from django.template import RequestContext
 from playground.socketioplayground import *
 
 
-def index(request):
-    return render_to_response('playground/index.html',
-        context_instance=RequestContext(request))
-
-
 def echo(request):
     return render_to_response('playground/echo.html',
         context_instance=RequestContext(request))
