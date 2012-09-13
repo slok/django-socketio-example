@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 (cd $HOME ; [ ! -d env ] && virtualenv env)
 
