@@ -54,3 +54,10 @@ class EchoNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
         self.socket.session['nick'] = user
         self.socket.session['color'] = color
         self.broadcast_event('user connected', user, color)
+
+    def recv_disconnect(self):
+        print('User %s Disconnected' % self.socket.session['nick'])
+        user = self.socket.session['nick']
+        color = self.socket.session['color']
+        self.broadcast_event('user disconnected', user, color)
+        self.disconnect(silent=True)

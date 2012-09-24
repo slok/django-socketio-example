@@ -67,6 +67,8 @@
                     //send the connection  message
                      socket.emit('join', user_id, color);
 
+                     //Prepare for disconnection
+                     $(window).on('beforeunload',function(){socket.disconnect();});
 
                     //receive messages and update html
                     socket.on('receive msg', function(nick, message, nickColor){
@@ -86,6 +88,13 @@
                         nickAux = '<span style=\'font-weight:bold; color:' +
                                         nickColor + ';\'>' + nick + '</span>';
                         $('<div class="alert alert-success">').html('User ' + nickAux + ' connected').appendTo('#messages');
+                    });
+
+                    //user disconnected
+                    socket.on('user disconnected', function(nick, nickColor){
+                        nickAux = '<span style=\'font-weight:bold; color:' +
+                                        nickColor + ';\'>' + nick + '</span>';
+                        $('<div class="alert alert-success">').html('User ' + nickAux + ' disconnected').appendTo('#messages');
                     });
 
                     //show the input text
